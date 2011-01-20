@@ -10,7 +10,9 @@ Gem::Specification.new do |s|
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["sleistner"]
   s.date = %q{2011-01-20}
-  s.description = %q{longer description of your gem}
+  s.description = %q{
+    extract paperclip attachments and save them to file or s3 storage
+  }
   s.email = %q{sleistner@gmail.com}
   s.extra_rdoc_files = [
     "LICENSE.txt",
@@ -19,18 +21,40 @@ Gem::Specification.new do |s|
   s.files = [
     ".document",
     "Gemfile",
+    "Gemfile.lock",
     "LICENSE.txt",
     "README.rdoc",
     "Rakefile",
     "VERSION",
     "lib/paperclip_archive_processor.rb",
-    "test/helper.rb"
+    "lib/paperclip_archive_processor/extractor.rb",
+    "lib/paperclip_archive_processor/integration.rb",
+    "lib/paperclip_archive_processor/processor.rb",
+    "lib/paperclip_archive_processor/zip_util.rb",
+    "paperclip_archive_processor.gemspec",
+    "public/system/archives/1/original/1",
+    "public/system/archives/1/original/2",
+    "public/system/archives/1/original/3",
+    "public/system/archives/1/original/4",
+    "public/system/archives/1/original/5",
+    "public/system/archives/1/original/5x.zip",
+    "test/database.yml",
+    "test/debug.log",
+    "test/extractor_test.rb",
+    "test/fixtures/1x.zip",
+    "test/fixtures/2x.zip",
+    "test/fixtures/3x.zip",
+    "test/fixtures/4x.zip",
+    "test/fixtures/5x.zip",
+    "test/helper.rb",
+    "test/integration_test.rb",
+    "test/processor_test.rb"
   ]
   s.homepage = %q{http://github.com/sleistner/paperclip_archive_processor}
   s.licenses = ["MIT"]
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.3.7}
-  s.summary = %q{one-line summary of your gem}
+  s.summary = %q{extract paperclip attachments and save them to file or s3 storage}
   s.test_files = [
     "test/extractor_test.rb",
     "test/helper.rb",
@@ -57,6 +81,7 @@ Gem::Specification.new do |s|
       s.add_development_dependency(%q<rcov>, [">= 0"])
       s.add_runtime_dependency(%q<paperclip>, ["~> 2.3.3"])
       s.add_runtime_dependency(%q<zip>, [">= 2.0.2"])
+      s.add_runtime_dependency(%q<aws-s3>, [">= 0"])
     else
       s.add_dependency(%q<paperclip>, ["~> 2.3.3"])
       s.add_dependency(%q<zip>, [">= 2.0.2"])
@@ -72,6 +97,7 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<rcov>, [">= 0"])
       s.add_dependency(%q<paperclip>, ["~> 2.3.3"])
       s.add_dependency(%q<zip>, [">= 2.0.2"])
+      s.add_dependency(%q<aws-s3>, [">= 0"])
     end
   else
     s.add_dependency(%q<paperclip>, ["~> 2.3.3"])
@@ -88,6 +114,7 @@ Gem::Specification.new do |s|
     s.add_dependency(%q<rcov>, [">= 0"])
     s.add_dependency(%q<paperclip>, ["~> 2.3.3"])
     s.add_dependency(%q<zip>, [">= 2.0.2"])
+    s.add_dependency(%q<aws-s3>, [">= 0"])
   end
 end
 
