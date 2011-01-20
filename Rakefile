@@ -15,16 +15,19 @@ Jeweler::Tasks.new do |gem|
   gem.homepage = "http://github.com/sleistner/paperclip_archive_processor"
   gem.license = "MIT"
   gem.summary = %Q{
-    extract paperclip attachments and save them to file or s3 storage
+    Extract paperclip archive attachments to file or S3.
   }
   gem.description = %Q{
-    extract paperclip attachments and save them to file or s3 storage
+    Extract paperclip archive attachments to file or S3.
+
+    Usage:
+
+    has_attached_file :archive,
+                      :url  => '/assets/games/assets/:id/archive.:extension',
+                      :extract_archive => true
   }
   gem.email = "sleistner@gmail.com"
   gem.authors = ["sleistner"]
-  gem.add_dependency 'paperclip', '~> 2.3.3'
-  gem.add_dependency 'zip', '>= 2.0.2'
-  gem.add_dependency 'aws-s3'
 end
 Jeweler::RubygemsDotOrgTasks.new
 
