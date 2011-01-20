@@ -11,32 +11,34 @@ require 'rake'
 
 require 'jeweler'
 Jeweler::Tasks.new do |gem|
-  # gem is a Gem::Specification... see http://docs.rubygems.org/read/chapter/20 for more options
   gem.name = "paperclip_archive_processor"
   gem.homepage = "http://github.com/sleistner/paperclip_archive_processor"
   gem.license = "MIT"
-  gem.summary = %Q{TODO: one-line summary of your gem}
-  gem.description = %Q{TODO: longer description of your gem}
+  gem.summary = %Q{
+    extract paperclip attachments and save them to file or s3 storage
+  }
+  gem.description = %Q{
+    extract paperclip attachments and save them to file or s3 storage
+  }
   gem.email = "sleistner@gmail.com"
   gem.authors = ["sleistner"]
-  # Include your dependencies below. Runtime dependencies are required when using your gem,
-  # and development dependencies are only needed for development (ie running rake tasks, tests, etc)
-  #  gem.add_runtime_dependency 'jabber4r', '> 0.1'
-  #  gem.add_development_dependency 'rspec', '> 1.2.3'
+  gem.add_dependency 'paperclip', '~> 2.3.3'
+  gem.add_dependency 'zip', '>= 2.0.2'
+  gem.add_dependency 'aws-s3'
 end
 Jeweler::RubygemsDotOrgTasks.new
 
 require 'rake/testtask'
 Rake::TestTask.new(:test) do |test|
   test.libs << 'lib' << 'test'
-  test.pattern = 'test/**/test_*.rb'
+  test.pattern = 'test/**/*_test.rb'
   test.verbose = true
 end
 
 require 'rcov/rcovtask'
 Rcov::RcovTask.new do |test|
   test.libs << 'test'
-  test.pattern = 'test/**/test_*.rb'
+  test.pattern = 'test/**/*_test.rb'
   test.verbose = true
 end
 
@@ -50,4 +52,10 @@ Rake::RDocTask.new do |rdoc|
   rdoc.title = "paperclip_archive_processor #{version}"
   rdoc.rdoc_files.include('README*')
   rdoc.rdoc_files.include('lib/**/*.rb')
+end
+
+desc 'Start an IRB session with all necessary files required.'
+task :shell do |t|
+  chdir File.dirname(__FILE__)
+  exec 'irb -I lib/ -I lib/paperclip_archive_processor -r rubygems -r tempfile -r test/helper'
 end
