@@ -5,13 +5,19 @@
 
 Gem::Specification.new do |s|
   s.name = %q{paperclip_archive_processor}
-  s.version = "0.3.1"
+  s.version = "0.3.2"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["sleistner"]
   s.date = %q{2011-01-20}
   s.description = %q{
-    extract paperclip attachments and save them to file or s3 storage
+    Extract paperclip archive attachments to file or S3.
+
+    Usage:
+
+    has_attached_file :archive,
+                      :url  => '/assets/games/assets/:id/archive.:extension',
+                      :extract_archive => true
   }
   s.email = %q{sleistner@gmail.com}
   s.extra_rdoc_files = [
@@ -54,7 +60,7 @@ Gem::Specification.new do |s|
   s.licenses = ["MIT"]
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.3.7}
-  s.summary = %q{extract paperclip attachments and save them to file or s3 storage}
+  s.summary = %q{Extract paperclip archive attachments to file or S3.}
   s.test_files = [
     "test/extractor_test.rb",
     "test/helper.rb",
@@ -79,9 +85,6 @@ Gem::Specification.new do |s|
       s.add_development_dependency(%q<bundler>, ["~> 1.0.0"])
       s.add_development_dependency(%q<jeweler>, ["~> 1.5.2"])
       s.add_development_dependency(%q<rcov>, [">= 0"])
-      s.add_runtime_dependency(%q<paperclip>, ["~> 2.3.3"])
-      s.add_runtime_dependency(%q<zip>, [">= 2.0.2"])
-      s.add_runtime_dependency(%q<aws-s3>, [">= 0"])
     else
       s.add_dependency(%q<paperclip>, ["~> 2.3.3"])
       s.add_dependency(%q<zip>, [">= 2.0.2"])
@@ -95,9 +98,6 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<bundler>, ["~> 1.0.0"])
       s.add_dependency(%q<jeweler>, ["~> 1.5.2"])
       s.add_dependency(%q<rcov>, [">= 0"])
-      s.add_dependency(%q<paperclip>, ["~> 2.3.3"])
-      s.add_dependency(%q<zip>, [">= 2.0.2"])
-      s.add_dependency(%q<aws-s3>, [">= 0"])
     end
   else
     s.add_dependency(%q<paperclip>, ["~> 2.3.3"])
@@ -112,9 +112,6 @@ Gem::Specification.new do |s|
     s.add_dependency(%q<bundler>, ["~> 1.0.0"])
     s.add_dependency(%q<jeweler>, ["~> 1.5.2"])
     s.add_dependency(%q<rcov>, [">= 0"])
-    s.add_dependency(%q<paperclip>, ["~> 2.3.3"])
-    s.add_dependency(%q<zip>, [">= 2.0.2"])
-    s.add_dependency(%q<aws-s3>, [">= 0"])
   end
 end
 
