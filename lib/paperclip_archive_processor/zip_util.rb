@@ -19,26 +19,15 @@ module PaperclipArchiveProcessor
       end
     end
 
-    # Unpack an archive to a directory on disk
+    # Unpack an archive with all its subdirectories to a directory on disk
     def self.unpack(archive, destination)
       Zip::ZipFile.open(archive) do |zip|
-        unpack_file(zip, destination)
-      end
-    end
-
-    def self.unpack_file(zip, destination, path='')
-      if(zip.file.file?(path))
-        FileUtils.mkdir_p(destination)
-        File.open(File.join(destination, path), 'w') do |dest|
-          zip.file.open(path) do |src|
-            dest.write src.read
-          end
-        end
-      else
-        dir = File.join(destination, path)
-        Dir.mkdir(dir) rescue puts("Directory Exists #{dir}")
-        zip.dir.foreach(path) do |dir|
-          unpack_file(zip, destination, File.join(path, dir))
+        zip.each do |file|
+          file_path = File.join destination, file.name
+          FileUtils.mkdir_p File.dirname(file_path)
+          # remove existing files
+          FileUtils.rm file_path if File.exist?(file_path) && File.file?(file_path)
+          zip.extract file, file_path
         end
       end
     end
